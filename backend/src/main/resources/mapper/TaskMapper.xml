@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.materialmaker.mapper.TaskMapper">
+
+    <insert id="insert">
+        INSERT INTO task (id, user_id, template_id, status, current_stage, fail_stage, fail_reason, result_url, asset_ids, created_at, updated_at)
+        VALUES (#{id}, #{userId}, #{templateId}, #{status}, #{currentStage}, #{failStage}, #{failReason}, #{resultUrl}, #{assetIds}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="findById" resultType="Task">
+        SELECT * FROM task WHERE id = #{id}
+    </select>
+
+    <select id="findByUserId" resultType="Task">
+        SELECT * FROM task WHERE user_id = #{userId} ORDER BY created_at DESC, id DESC
+    </select>
+
+    <select id="findByStatus" resultType="Task">
+        SELECT * FROM task WHERE status = #{status} ORDER BY created_at, id
+    </select>
+
+    <update id="startStage">
+        UPDATE task SET status = 'PROCESSING', current_stage = #{stage}, updated_at = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="markFailed">
+        UPDATE task SET status = 'FAILED', current_stage = #{failStage}, fail_stage = #{failStage}, fail_reason = #{failReason}, updated_at = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="markSuccess">
+        UPDATE task SET status = 'SUCCESS', current_stage = 'FINALIZING', result_url = #{resultUrl}, updated_at = NOW() WHERE id = #{id}
+    </update>
+
+</mapper>

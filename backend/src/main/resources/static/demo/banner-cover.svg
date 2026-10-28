@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <rect x="70" y="70" width="660" height="460" rx="16" fill="#ffffff" opacity="0.92"/>
+  <text x="400" y="290" font-family="sans-serif" font-size="52" font-weight="bold" fill="#1f2329" text-anchor="middle">横幅广告</text>
+  <text x="400" y="340" font-family="sans-serif" font-size="24" fill="#6b7280" text-anchor="middle">Banner</text>
+</svg>

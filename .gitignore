@@ -1,0 +1,20 @@
+# 依赖与构建产物
+node_modules/
+.next/
+target/
+*.jar
+
+# 运行时数据（素材与结果）
+backend/data/
+data/
+
+# 环境与凭据
+.env
+
+# 日志
+*.log
+
+# IDE / 系统
+.idea/
+.vscode/
+.DS_Store

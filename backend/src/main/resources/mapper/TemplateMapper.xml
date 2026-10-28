@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.materialmaker.mapper.TemplateMapper">
+
+    <select id="findByCategory" resultType="Template">
+        SELECT * FROM template
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+        </where>
+        ORDER BY id
+    </select>
+
+    <select id="findById" resultType="Template">
+        SELECT * FROM template WHERE id = #{id}
+    </select>
+
+</mapper>

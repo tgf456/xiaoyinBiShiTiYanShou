@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: material-maker-backend
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:material_maker}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${DB_USER:maker}
+    password: ${DB_PASSWORD:maker123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      # 使用幂等建表 + INSERT IGNORE，本地开发零手工初始化；Docker 下 MySQL 也会执行一次
+      mode: always
+      schema-locations: classpath:db/01-schema.sql
+      data-locations: classpath:db/02-data.sql
+      continue-on-error: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 60MB
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.materialmaker.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+app:
+  storage:
+    root: ${STORAGE_ROOT:./data}
+  cors:
+    allowed-origins: "*"
+
+logging:
+  level:
+    com.materialmaker: INFO

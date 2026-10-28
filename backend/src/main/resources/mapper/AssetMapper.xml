@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.materialmaker.mapper.AssetMapper">
+
+    <insert id="insert">
+        INSERT INTO asset (id, user_id, original_name, stored_path, mime_type, size_bytes, created_at)
+        VALUES (#{id}, #{userId}, #{originalName}, #{storedPath}, #{mimeType}, #{sizeBytes}, #{createdAt})
+    </insert>
+
+    <select id="findById" resultType="Asset">
+        SELECT * FROM asset WHERE id = #{id}
+    </select>
+
+    <select id="findByIds" resultType="Asset">
+        SELECT * FROM asset WHERE id IN
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>
